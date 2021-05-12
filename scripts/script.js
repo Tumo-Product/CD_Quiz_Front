@@ -1,34 +1,47 @@
 let loaderHidden = true;
 
-$(function () {
-    if (loaderHidden) {
-        $("#loadingScreen").hide();
-    } else {
-        $("#loadingScreen").show();
-    }
-});
-
 async function getData() {
     const response = await fetch("../test.json");
     const json = await response.json();
     return json;
 }
 
-getData().then(data => {
-    let sets = data.sets;
+let points = 3;
 
-    for (let section of sets) {
-        let name = section.name;
+$(function () {
+    if (loaderHidden) {
+        $("#loadingScreen").hide();
+    } else {
+        $("#loadingScreen").show();
+    }
+
+    getData().then(data => {
+        let sets = data.sets;
+        let html = "";
+    
+        let questions = [];
+        let testSet = sets[2];
+    
+        let name = testSet.name;
         $("#name").html(name);
+    
+        for (let question of testSet.questions) {
+            html += "<div><button>" + question.text + "</button></div>";
+            questions.push(question);
+        }
+        
+        // console.log(questions);
+        $(".questions").append(html);
 
-        for (let question of section.questions) {
-            if (!Array.isArray(question)) {
-                if (typeof(question) !== "object") {
-                    $(".questions").append("<div><button>" + question + "</button></div>");
+        $(".questions").on("click", "button", function() {
+            let question = $(this).text();
+            for (let q of questions) {
+                if (question == q.text) {
+                    points += parseInt(q.points);
                 }
             }
-        }
 
-        break;
-    }
+            console.log(points);
+        });
+    });
 });

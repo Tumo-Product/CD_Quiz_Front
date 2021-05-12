@@ -33,6 +33,27 @@
                     "alignment": "row"
                 }
             ]
+        },
+        {
+            "uid": "Mg==",
+            "name": "test set",
+            "description": "description of test set",
+            "questions": [
+                {
+                    "text": "first one",
+                    "points": "-2"
+                },
+                {
+                    "text": "second one",
+                    "points": "-1"
+                },
+                {
+                    "text": "third one",
+                    "points": "2"
+                }
+            ],
+            "alignment": "row",
+            "type": "text"
         }
     ]
 }
