@@ -1,59 +1,25 @@
 {
-    "sets": [
+    "uid": "Mg==",
+    "name": "test set",
+    "description": "description of test set",
+    "questions": [
         {
-            "uid" : "MA==",
-            "name": "Lorem Ipsum",
-            "description": "Lorem ipsum dolor amet",
-            "questions": [
-                "Lorem ipsum",
-                "Lorem ipsum dolor amet",
-                "Lorem ipsum dolor",
-                {
-                    "type": "text",
-                    "answers": [
-                        "Lorem ipsum"
-                    ],
-                    "alignment": "column"
-                }
+            "text": "first one",
+            "answers" : [
+                {"text" : "Ashot 1" , "points" : -2 },
+                {"text" : "Ashot 2" , "points" : 2 },
+                {"text" : "Ashot 4" , "points" : 0.5 }
             ]
         },
         {
-            "uid": "MQ==",
-            "name": "Ipsum Lorem",
-            "description": "Amet dolor ipsum Lorem",
-            "questions": [
-                "Ipsum lorem",
-                "Amet dolor ipsum Lorem",
-                "Dolor ipsum lorem",
-                {
-                    "type": "text",
-                    "answers": [
-                        "Ipsum lorem"
-                    ],
-                    "alignment": "row"
-                }
-            ]
+            "text": "second one",
+            "points": "-1"
         },
         {
-            "uid": "Mg==",
-            "name": "test set",
-            "description": "description of test set",
-            "questions": [
-                {
-                    "text": "first one",
-                    "points": "-2"
-                },
-                {
-                    "text": "second one",
-                    "points": "-1"
-                },
-                {
-                    "text": "third one",
-                    "points": "2"
-                }
-            ],
-            "alignment": "row",
-            "type": "text"
+            "text": "third one",
+            "points": "2"
         }
-    ]
+    ],
+    "alignment": "row",
+    "type": "text"
 }
