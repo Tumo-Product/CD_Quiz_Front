@@ -6,19 +6,19 @@ const flow_data = {
 
 const onPageLoad = async () => {
     let data = await parser.dataFetch();
-    flow_data.set_data = data;
+    flow_data.set_data = data.data.data[0];
     view.drawStartingScreen(flow_data.set_data.name);
     view.toggleLoadingScreen();
 }
 
 const nextQuestion = () => {
+    document.getElementById("questions").innerHTML = "";
     if (flow_data.index + 1 != flow_data.set_data.questions.length) {
         implementQuestion(flow_data.set_data.questions[++flow_data.index]);
     }
 }
 
 const implementQuestion = (question) => {
-    document.getElementById("questions").innerHTML = "";
     view.setQuestionName(question.text);
     view.setButtons(question.answers);
 }
