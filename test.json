@@ -1,23 +1,31 @@
 {
     "uid": "Mg==",
-    "name": "test set",
+    "name": "Test set",
     "description": "description of test set",
     "questions": [
         {
-            "text": "first one",
+            "text": "First one",
             "answers" : [
-                {"text" : "Ashot 1" , "points" : -2 },
-                {"text" : "Ashot 2" , "points" : 2 },
-                {"text" : "Ashot 4" , "points" : 0.5 }
+                {"text" : "first one" , "points" : -2 },
+                {"text" : "second one" , "points" : 2 },
+                {"text" : "third one" , "points" : 0.5 }
             ]
         },
         {
-            "text": "second one",
-            "points": "-1"
+            "text": "Second one",
+            "answers" : [
+                {"text" : "first one" , "points" : -2 },
+                {"text" : "second one" , "points" : 2 },
+                {"text" : "third one" , "points" : 0.5 }
+            ]
         },
         {
-            "text": "third one",
-            "points": "2"
+            "text": "Third one",
+            "answers" : [
+                {"text" : "first one" , "points" : -2 },
+                {"text" : "second one" , "points" : 2 },
+                {"text" : "third one" , "points" : 0.5 }
+            ]
         }
     ],
     "alignment": "row",

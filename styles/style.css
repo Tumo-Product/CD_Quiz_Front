@@ -17,13 +17,21 @@ h1 {
     align-items: center;
 }
 
+#play {
+    width: 5%;
+    border: 2px solid black;
+    border-radius: 8px;
+    margin: 25px;
+    cursor: pointer;
+}
+
 #loadingScreen {
     background: white;
     width: 100%;
     position: fixed;
 }
 
-.questions {
+#questions {
     width: 80%;
     min-height: 0;
     overflow-y: auto;
@@ -31,7 +39,7 @@ h1 {
     padding-right: 13px;
 }
 
-.questions div {
+#questions div {
     width: 100%;
     text-align: center;
     margin-top: 10px;
