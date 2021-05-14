@@ -16,7 +16,7 @@ const nextQuestion = () => {
     if (flow_data.index + 1 != flow_data.set_data.questions.length) {
         implementQuestion(flow_data.set_data.questions[++flow_data.index]);
     } else {
-        view.drawEndingScreen(flow_data.score);
+        view.drawEndingScreen("Ajvapnvaiv advnapvdapv opvjadovjapovjadoj vaodvj aopv a %{scr} nkapngpanfpanbpafnsbpkfsn bpsfknbapsnfbaspfnbsapbfnsfpknspbnsfbo %{scr} sfbsbffsbfsbsfbfs", flow_data.score);
     }
 }
 

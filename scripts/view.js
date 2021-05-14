@@ -34,9 +34,9 @@ const view = {
         $("#name").html(name);
         $("#name").after('<img id="play" onclick="onPlay()" src="graphics/play-fill.svg" alt="My Happy SVG"/>');
     },
-    drawEndingScreen: (score) => {
+    drawEndingScreen: (text, score) => {
         view.hideElement("questionName");
-        $("#score").html(`Score ${score}`);
+        $("#score").html(parser.finalScoreString(text, score));
     },
     hideElement: (id) => {
         $(function() {
