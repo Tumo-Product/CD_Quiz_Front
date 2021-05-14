@@ -15,6 +15,8 @@ const nextQuestion = () => {
     document.getElementById("questions").innerHTML = "";
     if (flow_data.index + 1 != flow_data.set_data.questions.length) {
         implementQuestion(flow_data.set_data.questions[++flow_data.index]);
+    } else {
+        view.drawEndingScreen(flow_data.score);
     }
 }
 
@@ -30,8 +32,8 @@ const onButtonClick = (id) => {
 }
 
 const onPlay = () => {
-    $("#name").hide();
-    $("#play").hide();
+    view.hideElement("name");
+    view.hideElement("play");
     implementQuestion(flow_data.set_data.questions[0]);
 }
 

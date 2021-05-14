@@ -33,5 +33,19 @@ const view = {
     drawStartingScreen: (name) => {
         $("#name").html(name);
         $("#name").after('<img id="play" onclick="onPlay()" src="graphics/play-fill.svg" alt="My Happy SVG"/>');
+    },
+    drawEndingScreen: (score) => {
+        view.hideElement("questionName");
+        $("#score").html("Score: " + score);
+    },
+    hideElement: (id) => {
+        $(function() {
+            $("#" + id).hide();
+        });
+    },
+    showElement: (id) => {
+        $(function() {
+            $("#" + id).show();
+        });
     }
 }
