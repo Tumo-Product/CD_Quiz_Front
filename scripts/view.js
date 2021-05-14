@@ -36,7 +36,7 @@ const view = {
     },
     drawEndingScreen: (score) => {
         view.hideElement("questionName");
-        $("#score").html("Score: " + score);
+        $("#score").html(`Score ${score}`);
     },
     hideElement: (id) => {
         $(function() {
