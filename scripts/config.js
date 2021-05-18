@@ -1,3 +1,3 @@
 const config = {
-  query_url : "../test.json"
+  query_url : "quiz/getsetsone/?_uid="
 }

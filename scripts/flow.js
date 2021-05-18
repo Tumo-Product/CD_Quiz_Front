@@ -5,8 +5,14 @@ const flow_data = {
 } 
 
 const onPageLoad = async () => {
-    let data = await parser.dataFetch();
-    flow_data.set_data = data.data.data[0];
+
+    let get_url =  document.location.href;
+    var url = new URL(get_url);
+    var _uid = url.searchParams.get("_uid");
+    _uid = _uid.substr(1, _uid.length - 2);
+    let data = await parser.dataFetch(_uid);
+    console.log(data.data.data);
+    flow_data.set_data = data.data.data;
     view.drawStartingScreen(flow_data.set_data.name);
     view.toggleLoadingScreen();
 }
@@ -16,7 +22,7 @@ const nextQuestion = () => {
     if (flow_data.index + 1 != flow_data.set_data.questions.length) {
         implementQuestion(flow_data.set_data.questions[++flow_data.index]);
     } else {
-        view.drawEndingScreen("Ajvapnvaiv advnapvdapv opvjadovjapovjadoj vaodvj aopv a %{scr} nkapngpanfpanbpafnsbpkfsn bpsfknbapsnfbaspfnbsapbfnsfpknspbnsfbo %{scr} sfbsbffsbfsbsfbfs", flow_data.score);
+        view.drawEndingScreen(flow_data.set_data.answer, flow_data.score);
     }
 }
 
