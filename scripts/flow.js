@@ -5,16 +5,20 @@ const flow_data = {
 } 
 
 const onPageLoad = async () => {
-
+    let def = "Id not found";
     let get_url =  document.location.href;
     var url = new URL(get_url);
     var _uid = url.searchParams.get("_uid");
-    _uid = _uid.substr(1, _uid.length - 2);
-    let data = await parser.dataFetch(_uid);
-    console.log(data.data.data);
-    flow_data.set_data = data.data.data;
-    view.drawStartingScreen(flow_data.set_data.name);
-    view.toggleLoadingScreen();
+    if (_uid)
+    {
+        _uid = _uid.substr(1, _uid.length - 2);
+        let data = await parser.dataFetch(_uid);
+        flow_data.set_data = data.data.data;
+        view.drawStartingScreen(flow_data.set_data.name);
+        view.toggleLoadingScreen();
+    }
+    else
+        alert("_uid not found");
 }
 
 const nextQuestion = () => {

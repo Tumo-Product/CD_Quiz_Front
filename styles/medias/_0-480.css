@@ -1,0 +1,22 @@
+@media (max-width: 480px) {
+    #play{
+        max-width: 45px;
+        max-height: 45px;   
+    }
+
+    #questionName{
+        font-size: 13px;
+    }
+
+    button{
+        font-size:10px;
+    }
+
+    h1{
+        font-size: 22px;
+    }
+
+    #score {
+        font-size: 14px;
+    }
+}
