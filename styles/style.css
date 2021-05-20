@@ -3,12 +3,14 @@
     src: url('../fonts/FedraSansAltPro/FedraSansAltPro-Medium.otf');
 }
 
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Fedra;
 }
+
 
 h1{
     text-align: center;
