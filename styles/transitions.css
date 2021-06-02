@@ -1,0 +1,46 @@
+#play div {
+	transition: 0.5s;
+}
+
+.widen {
+	transition: 1s;
+	width: 300px !important;
+	left: 300px !important;
+}
+
+.widen div {
+	box-shadow: 1px 1px 4px #b6c4dd, -1px -1px 4px #b6c4dd;
+	border-radius: 20px;
+}
+
+.widen img {
+	transition: 0.5s;
+	opacity: 0;
+}
+
+.left {
+	transition: 0.5s;
+	transform: rotate(0deg) !important;
+	margin-right: 1500px;
+}
+
+.right {
+	transition: 0.5s;
+	transform: rotate(0deg) !important;
+	margin-left: 1500px;
+}
+
+.center {
+	transition: 0.5s;
+	margin-right: 0;
+	margin-left: 0;
+}
+
+.offscreen {
+	transition: 0.5s;
+	margin-right: 2000px;
+}
+
+.offscreenRight {
+	margin-left: 2000px;
+}
