@@ -20,7 +20,7 @@ const onPageLoad = async () =>
 		let data = await parser.dataFetch(_uid);
 		flow_data.set_data = data.data.data;
 
-		view.drawStartingScreen(flow_data.set_data.name, "start");
+		view.drawStartingScreen(flow_data.set_data.description, "start");
 
 		for (let i = 0; i < flow_data.set_data.questions.length; i++)
 		{
