@@ -2,6 +2,11 @@
 	transition: 0.5s;
 }
 
+.straighten {
+	transform: rotate(0deg) !important;
+	transition: 0.5s;
+}
+
 .widen {
 	transition: 1s;
 	width: 300px !important;
@@ -20,13 +25,11 @@
 
 .left {
 	transition: 0.5s;
-	transform: rotate(0deg) !important;
 	margin-right: 1500px;
 }
 
 .right {
 	transition: 0.7s;
-	transform: rotate(0deg) !important;
 	margin-left: 1500px;
 }
 

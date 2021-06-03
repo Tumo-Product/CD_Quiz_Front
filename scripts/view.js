@@ -45,10 +45,16 @@ const view = {
         }
     },
 	onPLay: (length) => {
-		$("#play").addClass("widen");
+		$("#play").addClass("straighten");
+		$("#start").addClass("straighten");
+		$(`#_1`).addClass("straighten");
 
-		$("#start").addClass("left");
-		$(`#_1`).addClass("right");
+		setTimeout(function(){ 
+			$("#play").addClass("widen");
+
+			$("#start").addClass("left");
+			$(`#_1`).addClass("right");
+		}, 500);
 
 		for (let i = 0; i < length; i++) {
 			if (i > 1) {
