@@ -51,7 +51,7 @@ const view = {
 		$(`#_1`).addClass("right");
 
 		for (let i = 0; i < length; i++) {
-			if (i > 2) {
+			if (i > 1) {
 				$(`#_${i}`).addClass("offscreenRight");
 			}
 			
