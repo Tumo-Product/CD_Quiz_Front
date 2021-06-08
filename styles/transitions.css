@@ -1,4 +1,4 @@
-#play div {
+.smooth {
 	transition: 0.5s;
 }
 
@@ -8,19 +8,22 @@
 }
 
 .widen {
-	transition: 1s;
-	width: 300px !important;
-	left: 300px !important;
+	transition: 0.5s;
+	width: 317px !important;
+	left: 266px !important;
 }
 
 .widen div {
 	box-shadow: 1px 1px 4px #b6c4dd, -1px -1px 4px #b6c4dd;
-	border-radius: 20px;
 }
 
 .widen img {
 	transition: 0.5s;
 	opacity: 0;
+}
+
+.widenHollow {
+	width: 315px !important;
 }
 
 .left {
@@ -46,4 +49,9 @@
 
 .offscreenRight {
 	margin-left: 2000px;
+}
+
+.goLeft {
+	transition: 0.5s !important;
+	left: 4px;
 }

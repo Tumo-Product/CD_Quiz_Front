@@ -1,14 +1,25 @@
 const view = {
-    loaderOpen: true,
+	loaderOpen: true,
 	rotations: [3, -3],
+	play:
+		`<div id="play" onclick="onPlay()">
+		<div id="hollow"></div>
+		<div id="bar"></div>
+		<div id="circle">
+			<div></div>
+			<img src="graphics/play-fill.svg" alt="My Happy SVG"/>
+		</div>
+	</div>`
+	,
 	name: '<div id="name"><h1></h1></div>',
 	questions: `<div id="questions">`,
 	progress: 0,
 
-	createContainer: (i) => {
+	createContainer: (i, invisible) => {
 		let container =
-		`<div id="${i}" class="container">
+			`<div id="${i}" class="container">
 			<div id="questionName">
+				<img src="graphics/play-fill.svg" alt="My Happy SVG"/>
 				<h2></h2>
 			</div>
 			<div id="score">
@@ -18,85 +29,104 @@ const view = {
 		</div>`;
 
 		$(".parent").eq(1).prepend(container);
+
+		if (invisible) {
+			$(`#${i}`).hide();
+		}
 	},
 
-    setButtons: (list, i) => {
-        let html = "";
-        let id = 0;
-		
-        for (let question of list) {
-            html += view.createButton(question.text, id);
-            id++;
-        }
+	setButtons: (list, i) => {
+		let html = "";
+		let id = 0;
 
-        $(function() {
+		for (let question of list) {
+			html += view.createButton(question.text, id);
+			id++;
+		}
+
+		$(function () {
 			$(`#_${i}`).append(view.questions);
 
-            $(`#_${i} #questions`).append(html);
-        })
-    },
-    toggleLoadingScreen: () => {
-        if (view.loaderOpen) {
-            $("#loadingScreen").hide();
-            view.loaderOpen = false;
-        } else {
-            $("#loadingScreen").show();
-            view.loaderOpen = true;
-        }
-    },
+			$(`#_${i} #questions`).append(html);
+		})
+	},
+	toggleLoadingScreen: () => {
+		if (view.loaderOpen) {
+			$("#loadingScreen").hide();
+			view.loaderOpen = false;
+		} else {
+			$("#loadingScreen").show();
+			view.loaderOpen = true;
+		}
+	},
 	onPLay: (length) => {
 		$("#play").addClass("straighten");
 		$("#start").addClass("straighten");
+		$("#bar").attr("style", "width: 0px !important");
+
 		$(`#_1`).addClass("straighten");
 
-		setTimeout(function(){ 
-			$("#play").addClass("widen");
+		$("#play").addClass("widen");
+		$("#hollow").addClass("widenHollow");
 
-			$("#start").addClass("left");
-			$(`#_1`).addClass("right");
-		}, 500);
+		$("#circle").addClass("goLeft");
+
+		$("#start").addClass("left");
+		$(`#_1`).addClass("right");
+
+		$("#bar").addClass("smooth");
 
 		for (let i = 0; i < length; i++) {
 			if (i > 1) {
 				$(`#_${i}`).addClass("offscreenRight");
+				$(`#_${i}`).show();
 			}
-			
-			$(`#_${i}`).css("transform", "rotate(0deg)");
+
+			$(`#_${i}`).attr("style", "transform: rotate(0deg) !important");
 		}
 
-		$("#_0").css("transform", "rotate(0deg)");
-
 		$("#play").attr("onclick", "").unbind("click");
+
+		$(".item").mousedown(function () {
+			$(this).append(`<div class="click"></div>`);
+		});
+		$(".item").mouseup(function () {
+			$(this).find(".click").remove();
+		});
+		$(".item").mouseleave(function () {
+			$(this).find(".click").remove();
+		});
 	},
-    createButton: (val, id) => {
-        return `<div><button onclick="onButtonClick(${id})" id ="${id}">` + val + "</button></div>";
-    },
-    changeColor: (id, color) => {
-        document.getElementById(id).style.backgroundColor = color;
-    },
-    setQuestionName: (qname, i, rotate) => {
-        $(`#_${i} #questionName h2`).html(qname);
+	createButton: (val, id) => {
+		return `<div class="item"><button onclick="onButtonClick(${id})" id ="${id}">` + val + "</button></div>";
+	},
+	changeColor: (id, color) => {
+		document.getElementById(id).style.backgroundColor = color;
+	},
+	setQuestionName: (qname, i, rotate) => {
+		$(`#_${i} #questionName h2`).html(qname);
 
 		if (rotate) {
 			$(`#_${i}`).css("transform", `rotate(${view.rotations[i]}deg)`);
 		}
-    },
-	
-    drawStartingScreen: (name, i) => {
-		view.createContainer(i);
+	},
 
-        $(`#${i}`).append(view.name);
+	drawStartingScreen: (name) => {
+		view.createContainer("start");
 
-        $(`#${i} #name h1`).html(name);
-        $("body").append('<div id="play" onclick="onPlay()"><div><img src="graphics/play-fill.svg" alt="My Happy SVG"/></div></div>');
-    },
+		$(`#start`).append(view.name);
 
-    drawEndingScreen: (i) => {
+		$(`#start #name h1`).html(name);
+		$("body").append(view.play);
+		$("#start #questionName").hide();
+	},
+
+	drawEndingScreen: (i) => {
 		view.createContainer("_" + i);
 
 		$(`#_${i}`).addClass("offscreenRight");
-        
-    },
+
+	},
 	updateScore: (text, score, i) => {
 		console.log(parser.finalScoreString(text, score));
 		$(`#_${i} #questionName`).hide();
@@ -118,6 +148,19 @@ const view = {
 	},
 	updateProgressBar: (step) => {
 		view.progress += step;
-		$("#play div").css("margin-left", `${view.progress}px`);
+		$("#circle").attr("style", `margin-left: ${view.progress}px !important`);
+		$("#bar").attr("style", `width: ${view.progress + 27}px !important`);
+	},
+	fitText: (name) => {
+		$(`#${name} h2`).each(function (i, resizer) {
+			let size;
+			let desired_height = 160;
+
+			while ($(resizer).height() > desired_height) {
+				// console.log($(resizer).height(), $(resizer).html());
+				size = parseInt($(resizer).css("font-size"), 10);
+				$(resizer).css("font-size", size - 2);
+			}
+		});
 	}
 }

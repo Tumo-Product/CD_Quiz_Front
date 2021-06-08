@@ -20,16 +20,16 @@ const onPageLoad = async () =>
 		let data = await parser.dataFetch(_uid);
 		flow_data.set_data = data.data.data;
 
-		view.drawStartingScreen(flow_data.set_data.description, "start");
-		$("#start #questionName").hide();
+		view.drawStartingScreen(flow_data.set_data.description);
 
 		for (let i = 0; i < flow_data.set_data.questions.length; i++)
 		{
-			generateCards(flow_data.set_data.questions[i], i, true);
+			generateCards(flow_data.set_data.questions[i], i, true, i > 1);
 		}
 
 		view.drawEndingScreen(flow_data.set_data.questions.length);
 
+		view.fitText("questionName");
 		view.toggleLoadingScreen();
 	}
 	else
@@ -42,7 +42,7 @@ const nextQuestion = () =>
 	{
 		let i = ++flow_data.index;
 
-		changeCard(flow_data.set_data.questions[i], i, true);
+		changeCard(i);
 
 		step = progWidth / flow_data.set_data.questions.length;
 		view.updateProgressBar(step);
@@ -53,21 +53,18 @@ const nextQuestion = () =>
 	}
 }
 
-const generateCards = (question, i, rotate, right) =>
+const generateCards = (question, i, rotate, invisible) =>
 {
-	view.createContainer("_" + i);
+	view.createContainer("_" + i, invisible);
 	view.setQuestionName(question.text, i, rotate);
 	view.setButtons(question.answers, i);
 }
 
-const changeCard = (question, i, right) =>
+const changeCard = (i) =>
 {
 	view.swipe(i);
 
-	if (right)
-	{
-		$(`#_${i + 1}`).addClass("right");
-	}
+	$(`#_${i + 1}`).addClass("right");
 }
 
 const onButtonClick = (id) =>
@@ -78,7 +75,6 @@ const onButtonClick = (id) =>
 
 const onPlay = () =>
 {
-	// implementQuestion(flow_data.set_data.questions[0]);
 	view.onPLay(flow_data.set_data.questions.length);
 }
 
