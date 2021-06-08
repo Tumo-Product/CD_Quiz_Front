@@ -99,6 +99,7 @@ const view = {
     },
 	updateScore: (text, score, i) => {
 		console.log(parser.finalScoreString(text, score));
+		$(`#_${i} #questionName`).hide();
 		$(`#_${i} #score h2`).html(parser.finalScoreString(text, score));
 	},
 	swipe: (i) => {
@@ -116,7 +117,6 @@ const view = {
 		$("#_" + (i - 1)).addClass("left");
 	},
 	updateProgressBar: (step) => {
-		console.log(step);
 		view.progress += step;
 		$("#play div").css("margin-left", `${view.progress}px`);
 	}

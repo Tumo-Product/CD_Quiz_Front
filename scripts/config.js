@@ -1,3 +1,3 @@
 const config = {
-  query_url : "quiz/getsetsone/?_uid="
+  query_url : "calc/getsetsone/?_uid="
 }

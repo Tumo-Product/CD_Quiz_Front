@@ -65,7 +65,7 @@ body {
     overflow-x: hidden;
     padding-right: 13px;
 	height: 100%;
-	width: 400px;
+	width: 350px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -73,9 +73,9 @@ body {
 }
 
 #questions div {
-    width: 100%;
     text-align: center;
     margin-top: 1.5rem;
+	width: 100%;
 }
 
 .container {
@@ -96,6 +96,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	width: 340px;
 }
 
 #name {
@@ -133,9 +134,9 @@ body {
 }
 
 button {
+	width: 85%;
     padding: 5%;
     cursor: pointer;
-    width: 80%;
     min-height: 75px;
 	border: none;
 	border-radius: 10px;

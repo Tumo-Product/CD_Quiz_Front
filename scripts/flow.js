@@ -21,6 +21,7 @@ const onPageLoad = async () =>
 		flow_data.set_data = data.data.data;
 
 		view.drawStartingScreen(flow_data.set_data.description, "start");
+		$("#start #questionName").hide();
 
 		for (let i = 0; i < flow_data.set_data.questions.length; i++)
 		{
@@ -61,7 +62,6 @@ const generateCards = (question, i, rotate, right) =>
 
 const changeCard = (question, i, right) =>
 {
-	console.log(i);
 	view.swipe(i);
 
 	if (right)
