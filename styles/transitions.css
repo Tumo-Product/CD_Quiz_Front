@@ -13,11 +13,7 @@
 	left: 266px !important;
 }
 
-.widen div {
-	box-shadow: 1px 1px 4px #b6c4dd, -1px -1px 4px #b6c4dd;
-}
-
-.widen img {
+.widen svg {
 	transition: 0.5s;
 	opacity: 0;
 }
@@ -32,7 +28,7 @@
 }
 
 .right {
-	transition: 0.7s;
+	transition: 0.6s;
 	margin-left: 1500px;
 }
 
@@ -53,5 +49,13 @@
 
 .goLeft {
 	transition: 0.5s !important;
-	left: 4px;
+	left: 2px;
+}
+
+.hide {
+	opacity: 0;
+}
+
+.show {
+	opacity: 1;
 }

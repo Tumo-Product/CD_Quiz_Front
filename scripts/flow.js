@@ -4,7 +4,9 @@ const flow_data = {
 	score: 0,
 }
 
-let progWidth = 300 - 60;
+let oldScore = -1;
+
+let progWidth = 317-30;
 let step = 0;
 
 const onPageLoad = async () =>
@@ -29,7 +31,12 @@ const onPageLoad = async () =>
 
 		view.drawEndingScreen(flow_data.set_data.questions.length);
 
-		view.fitText("questionName");
+		setTimeout(() => {
+			view.fitText("questionName");
+		}, 15);
+
+		view.hideUndo();
+		
 		view.toggleLoadingScreen();
 	}
 	else
@@ -43,9 +50,11 @@ const nextQuestion = () =>
 		let i = ++flow_data.index;
 
 		changeCard(i);
+		updateProgress(false);
 
-		step = progWidth / flow_data.set_data.questions.length;
-		view.updateProgressBar(step);
+		if (i > 0) {
+			view.showUndo();
+		}
 		
 		if (i ==  flow_data.set_data.questions.length) {
 			view.updateScore(flow_data.set_data.answer, flow_data.score, flow_data.set_data.questions.length);
@@ -63,12 +72,11 @@ const generateCards = (question, i, rotate, invisible) =>
 const changeCard = (i) =>
 {
 	view.swipe(i);
-
-	$(`#_${i + 1}`).addClass("right");
 }
 
 const onButtonClick = (id) =>
 {
+	oldScore = flow_data.score;
 	flow_data.score += flow_data.set_data.questions[flow_data.index].answers[id].points;
 	nextQuestion();
 }
@@ -76,6 +84,23 @@ const onButtonClick = (id) =>
 const onPlay = () =>
 {
 	view.onPLay(flow_data.set_data.questions.length);
+}
+
+const onUndo = () => {
+	flow_data.score = oldScore;
+	changeCard(--flow_data.index);
+	
+	if (flow_data.index < 1) {
+		view.hideUndo();
+	}
+
+	updateProgress(true);
+}
+
+const updateProgress = (undo) => {
+	step = progWidth / flow_data.set_data.questions.length;
+
+	view.updateProgressBar(undo ? -step : step);
 }
 
 $(onPageLoad())
