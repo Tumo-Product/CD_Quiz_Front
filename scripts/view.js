@@ -3,15 +3,15 @@ const view = {
 	rotations: [3, -3],
 	play:
 		`<div id="play" onclick="onPlay()">
-		<div id="hollow"></div>
-		<div id="bar"></div>
-		<div class="circle">
-			<div></div>
-			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#9194E3" class="bi bi-play-fill" viewBox="0 0 16 16">
-				<path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
-			</svg>
-		</div>
-	</div>`
+			<div id="hollow"></div>
+			<div id="bar"></div>
+			<div class="circle">
+				<div></div>
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#9194E3" class="bi bi-play-fill" viewBox="0 0 16 16">
+					<path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+				</svg>
+			</div>
+		</div>`
 	,
 	name: '<div id="name"><h1></h1></div>',
 	questions: `<div id="questions">`,
@@ -21,19 +21,19 @@ const view = {
 	createContainer: (i, invisible) => {
 		let container =
 			`<div id="${i}" class="container">
-			<div class="questionName">
-				<div class="circle"><div></div></div>
-				<div class="circle"><div></div></div>
-				<div class="circle"><div></div></div>
-				<div class="circle"><div></div></div>
-				<img src="graphics/play-fill.svg" alt="My Happy SVG"/>
-				<h2></h2>
-			</div>
-			<div id="score">
-				<h2></h2>
-			</div>
-			</div>
-		</div>`;
+				<div class="questionName">
+					<div class="circle"><div></div></div>
+					<div class="circle"><div></div></div>
+					<div class="circle"><div></div></div>
+					<div class="circle"><div></div></div>
+					<img src="graphics/play-fill.svg" alt="My Happy SVG"/>
+					<h2></h2>
+				</div>
+				<div id="score">
+					<h2></h2>
+				</div>
+				</div>
+			</div>`;
 
 		$(".parent").eq(1).prepend(container);
 
@@ -95,6 +95,7 @@ const view = {
 		$(`#_${length}`).attr("style", "z-index: 15 !important");
 
 		$("#play").attr("onclick", "").unbind("click");
+		$("#play").attr("style", "cursor: initial !important");
 
 		$(".item").mousedown(function () {
 			$(this).append(`<div class="click"></div>`);
@@ -105,6 +106,16 @@ const view = {
 		});
 		$(".item").mouseleave(function () {
 			$(this).find(".click").remove();
+		});
+
+		$("#undo").mousedown(function () {
+			$(this).find("div").hide();
+		});
+		$("#undo").mouseup(async function () {
+			$(this).find("div").show();
+		});
+		$("#undo").mouseleave(async function () {
+			$(this).find("div").show();
 		});
 	},
 	createButton: (val, id) => {
@@ -170,7 +181,7 @@ const view = {
 		view.progress += step;
 
 		$("#play .circle").attr("style", `left: ${view.progress}px !important`);
-		$("#bar").attr("style", `width: ${view.progress + 27}px !important`);
+		$("#bar").attr("style", `width: ${view.progress + 25}px !important`);
 
 		if (reset) {
 			$("#play").addClass("endTransition");

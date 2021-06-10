@@ -186,9 +186,19 @@ body {
 	padding-left: 25px;
 }
 
+.item:last-child {
+	margin: 0;
+}
+
+.item {
+	margin-bottom: 26px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 #questions div {
     text-align: center;
-    margin-top: 1.5rem;
 	width: 100%;
 }
 
@@ -276,12 +286,6 @@ button:hover {
 	pointer-events: none;
 }
 
-.item {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
 #undo {
 	display: none;
 	transition: 0.2s;
@@ -299,9 +303,13 @@ button:hover {
 }
 
 #undo svg {
-	fill: #EBD730;
+	fill: #e8d755;
 }
 
-#undo:hover svg {
+#undo:hover svg{
 	fill: #E8D75579;
+}
+
+#undo:active svg {
+	fill: #E8D75553;
 }
