@@ -17,6 +17,7 @@ const view = {
 	questions: `<div id="questions">`,
 	progress: 0,
 	swipeDelay: 150,
+	endSetup: false,
 
 	createContainer: (i, invisible) => {
 		let container =
@@ -159,9 +160,13 @@ const view = {
 		view.updateProgressBar(0, true);
 	},
 	setupEnd: (i) => {
-		$(`#_${i} .questionName`).hide();
-		$(`#_${i}`).addClass("endingScreen");
-		$(`#_${i}`).prepend(`<img src="graphics/play-fill.svg">`);
+		if (!view.endSetup) {
+			$(`#_${i} .questionName`).hide();
+			$(`#_${i}`).addClass("endingScreen");
+			$(`#_${i}`).prepend(`<img src="graphics/play-fill.svg">`);
+		}
+
+		view.endSetup = true;
 	},
 	swipe: (i) => {
 		$("#_" + (i - 1)).removeClass("right left center offscreenRight offscreen");
