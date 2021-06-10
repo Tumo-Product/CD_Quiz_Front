@@ -52,16 +52,18 @@ const nextQuestion = async () =>
 		let l = flow_data.set_data.questions.length;
 		let i = ++flow_data.index;
 
-		changeCard(i);
-		updateProgress(false);
-
 		if (i > 0) {
 			view.showUndo();
 		}
+
+		if (i != l) changeCard(i);
+		updateProgress(false);
 		
 		if (i == l - 2) view.setupEnd(l);
 		if (i == l) {
 			view.updateScore(flow_data.set_data.answer, flow_data.score, flow_data.set_data.questions.length);
+			await timeout(600);
+			changeCard(i);
 			view.collectCards(flow_data.set_data.questions.length);
 		}
 	}
