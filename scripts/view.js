@@ -149,16 +149,18 @@ const view = {
 	},
 	updateScore: (text, score, i) => {
 		view.hideUndo();
+		
+		$(`#_${i}`).prepend(`<h1 id="scoreNum">${score}</h1>`)
+		$(`#_${i} #score h2`).html(parser.finalScoreString(text, score));
 
 		$("#play svg").remove();
 		$("#play").removeClass("widen");
 		$("#hollow").removeClass("widenHollow");
 		view.updateProgressBar(0, true);
-
-		$(`#_${i}`).addClass("endingScreen");
-		$(`#_${i}`).prepend(`<h1 id="scoreNum">${score}</h1>`)
+	},
+	setupEnd: (i) => {
 		$(`#_${i} .questionName`).hide();
-		$(`#_${i} #score h2`).html(parser.finalScoreString(text, score));
+		$(`#_${i}`).addClass("endingScreen");
 		$(`#_${i}`).prepend(`<img src="graphics/play-fill.svg">`);
 	},
 	swipe: (i) => {

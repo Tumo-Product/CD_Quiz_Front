@@ -49,6 +49,7 @@ const nextQuestion = async () =>
 	await timeout(view.swipeDelay);
 	if (flow_data.index + 1 <= flow_data.set_data.questions.length)
 	{
+		let l = flow_data.set_data.questions.length;
 		let i = ++flow_data.index;
 
 		changeCard(i);
@@ -58,9 +59,9 @@ const nextQuestion = async () =>
 			view.showUndo();
 		}
 		
-		if (i == flow_data.set_data.questions.length) {
+		if (i == l - 2) view.setupEnd(l);
+		if (i == l) {
 			view.updateScore(flow_data.set_data.answer, flow_data.score, flow_data.set_data.questions.length);
-
 			view.collectCards(flow_data.set_data.questions.length);
 		}
 	}
