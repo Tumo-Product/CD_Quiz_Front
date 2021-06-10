@@ -2,7 +2,7 @@ const view = {
 	loaderOpen: true,
 	rotations: [3, -3],
 	play:
-	`<div id="play" onclick="onPlay()">
+		`<div id="play" onclick="onPlay()">
 		<div id="hollow"></div>
 		<div id="bar"></div>
 		<div class="circle">
@@ -16,6 +16,7 @@ const view = {
 	name: '<div id="name"><h1></h1></div>',
 	questions: `<div id="questions">`,
 	progress: 0,
+	swipeDelay: 150,
 
 	createContainer: (i, invisible) => {
 		let container =
@@ -65,7 +66,7 @@ const view = {
 			view.loaderOpen = true;
 		}
 	},
-	onPLay: (length) => {
+	onPlay: (length) => {
 		$("#play").addClass("straighten");
 		$("#start").addClass("straighten");
 		$("#bar").attr("style", "width: 0px !important");
@@ -91,12 +92,15 @@ const view = {
 			$(`#_${i}`).attr("style", "transform: rotate(0deg) !important");
 		}
 
+		$(`#_${length}`).attr("style", "z-index: 15 !important");
+
 		$("#play").attr("onclick", "").unbind("click");
 
 		$(".item").mousedown(function () {
 			$(this).append(`<div class="click"></div>`);
 		});
-		$(".item").mouseup(function () {
+		$(".item").mouseup(async function () {
+			await timeout(view.swipeDelay);
 			$(this).find(".click").remove();
 		});
 		$(".item").mouseleave(function () {
@@ -133,9 +137,18 @@ const view = {
 		$(`#_${i}`).addClass("offscreenRight");
 	},
 	updateScore: (text, score, i) => {
-		console.log(parser.finalScoreString(text, score));
+		view.hideUndo();
+
+		$("#play svg").remove();
+		$("#play").removeClass("widen");
+		$("#hollow").removeClass("widenHollow");
+		view.updateProgressBar(0, true);
+
+		$(`#_${i}`).addClass("endingScreen");
+		$(`#_${i}`).prepend(`<h1 id="scoreNum">${score}</h1>`)
 		$(`#_${i} .questionName`).hide();
 		$(`#_${i} #score h2`).html(parser.finalScoreString(text, score));
+		$(`#_${i}`).prepend(`<img src="graphics/play-fill.svg">`);
 	},
 	swipe: (i) => {
 		$("#_" + (i - 1)).removeClass("right left center offscreenRight offscreen");
@@ -148,39 +161,51 @@ const view = {
 			$("#_" + (i - 2)).addClass("offscreen");
 			$("#_" + (i + 2)).addClass("offscreenRight");
 		}
-		
+
 		$(`#_${i + 1}`).addClass("right");
 		$("#_" + i).addClass("center");
 		$("#_" + (i - 1)).addClass("left");
 	},
-	updateProgressBar: (step) => {
+	updateProgressBar: async (step, reset) => {
 		view.progress += step;
+
 		$("#play .circle").attr("style", `left: ${view.progress}px !important`);
 		$("#bar").attr("style", `width: ${view.progress + 27}px !important`);
+
+		if (reset) {
+			$("#play").addClass("endTransition");
+
+			$("#play .circle").attr("style", `left: 0px !important`);
+			$("#bar").attr("style", `width: 0px !important`);
+			$("#play").attr("style", `width: 25px !important; left: 420px !important`);
+			$("#hollow").attr("style", `width: 0px !important`);
+
+			await timeout(500);
+			$("#play").addClass("end");
+		}
 	},
 	fitText: (name) => {
-		$(`.${name} h2`).each(function () {
+		$(`.${name} h2`).each(function (i) {
 			let size;
 			let desiredHeight = 160;
 
-			while ($(this).height() > desiredHeight || $(this).prop('scrollWidth') > $(this).width()) {
+			while ($(this).prop("scrollHeight") > desiredHeight || $(this).prop('scrollWidth') > $(this).width()) {
 				size = parseInt($(this).css("font-size"), 10);
 				$(this).css("font-size", size - 3);
 			}
 		});
 	},
 	showUndo: () => {
-		$("#undo").removeClass("hide show");
-		$("#undo").show();
-
-		$("#undo").addClass("show");
+		$("#undo").css("display", "flex");
 	},
 	hideUndo: () => {
-		$("#undo").removeClass("hide show");
-		setTimeout(() => {
-			$("#undo").hide();
-		}, 200);
-
-		$("#undo").addClass("hide");
+		$("#undo").hide();
+	},
+	collectCards: (lastIndex) => {
+		for (let i = 1; i < 3; i++) {
+			$(`#_${lastIndex - i}`).removeClass("right left center offscreenRight offscreen");
+			$(`#_${lastIndex - i}`).addClass("center");
+			$(`#_${lastIndex - i}`).css("transform", `rotate(${view.rotations[i - 1]}deg)`);
+		}
 	}
 }

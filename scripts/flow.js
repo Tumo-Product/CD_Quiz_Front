@@ -9,6 +9,10 @@ let oldScore = -1;
 let progWidth = 317-30;
 let step = 0;
 
+const timeout = (ms) => {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 const onPageLoad = async () =>
 {
 	let def = "Id not found";
@@ -31,11 +35,8 @@ const onPageLoad = async () =>
 
 		view.drawEndingScreen(flow_data.set_data.questions.length);
 
-		setTimeout(() => {
-			view.fitText("questionName");
-		}, 15);
-
-		view.hideUndo();
+		await timeout(1000);
+		view.fitText("questionName");
 		
 		view.toggleLoadingScreen();
 	}
@@ -43,8 +44,9 @@ const onPageLoad = async () =>
 		alert("_uid not found");
 }
 
-const nextQuestion = () =>
+const nextQuestion = async () =>
 {
+	await timeout(view.swipeDelay);
 	if (flow_data.index + 1 <= flow_data.set_data.questions.length)
 	{
 		let i = ++flow_data.index;
@@ -56,8 +58,10 @@ const nextQuestion = () =>
 			view.showUndo();
 		}
 		
-		if (i ==  flow_data.set_data.questions.length) {
+		if (i == flow_data.set_data.questions.length) {
 			view.updateScore(flow_data.set_data.answer, flow_data.score, flow_data.set_data.questions.length);
+
+			view.collectCards(flow_data.set_data.questions.length);
 		}
 	}
 }
@@ -83,13 +87,13 @@ const onButtonClick = (id) =>
 
 const onPlay = () =>
 {
-	view.onPLay(flow_data.set_data.questions.length);
+	view.onPlay(flow_data.set_data.questions.length);
 }
 
 const onUndo = () => {
 	flow_data.score = oldScore;
 	changeCard(--flow_data.index);
-	
+
 	if (flow_data.index < 1) {
 		view.hideUndo();
 	}

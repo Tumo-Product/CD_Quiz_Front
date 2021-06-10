@@ -83,6 +83,7 @@ body {
 }
 
 .circle {
+	transition: 0.5s !important;
 	width: 25px;
 	height: 25px;
 	box-shadow: -1px 2px 2px #00000029, 2px -1px 2px #FEFEFE;
@@ -103,6 +104,13 @@ body {
 	width: 21px;
 	height: 21px;
 	box-shadow: -1px 1px 1px #D7D7DB7B;
+}
+
+#scoreNum {
+	color: #F26671;
+	position: absolute;
+	margin: 10px 10px 20px 30px;
+	font-size: 100px;
 }
 
 .questionName {
@@ -129,8 +137,7 @@ body {
     font-size: 33px;
 	font-weight: normal;
 	color: #F26671;
-	overflow-x: auto;
-	overflow-y:hidden;
+	overflow: auto;
 }
 
 .questionName .circle {
@@ -215,7 +222,10 @@ body {
 }
 
 #score h2 {
-    font-size: 4vw;
+	color: #5D6B7E !important;
+	font-family: FedraBook;
+    font-size: 11px;
+	font-weight: normal;
     text-align: center;
 	height: 100%;
 	display: flex;
@@ -235,7 +245,7 @@ body {
 }
 
 button {
-	padding: 14px 10px 10px 10px;
+	padding: 14px 10px 10px 21px;
 	
 	font-family: FedraBook;
 	font-size: 13px;
@@ -273,6 +283,7 @@ button:hover {
 }
 
 #undo {
+	display: none;
 	transition: 0.2s;
 	width: 30px !important;
 	height: 30px !important;

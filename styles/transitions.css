@@ -48,14 +48,27 @@
 }
 
 .goLeft {
-	transition: 0.5s !important;
 	left: 2px;
 }
 
-.hide {
-	opacity: 0;
+.end {
+	bottom: -35px !important;
 }
 
-.show {
-	opacity: 1;
+.endingScreen {
+	flex-direction: column !important;
+	padding: 20px !important;
+}
+
+.endingScreen img {
+	border-radius: 19px;
+	background-color: white;
+}
+
+.endingScreen #score {
+	padding: 20px;
+}
+
+.endTransition, .endTransition div {
+	transition: 0.4s !important;
 }
