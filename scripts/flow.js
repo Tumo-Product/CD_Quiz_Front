@@ -30,7 +30,7 @@ const onPageLoad = async () =>
 
 		for (let i = 0; i < flow_data.set_data.questions.length; i++)
 		{
-			generateCards(flow_data.set_data.questions[i], i, true, i > 1);
+			generateCards(flow_data.set_data.questions[i], i, true, i > 1, flow_data.set_data.questions[i].image);
 		}
 
 		view.drawEndingScreen(flow_data.set_data.questions.length);
@@ -69,9 +69,9 @@ const nextQuestion = async () =>
 	}
 }
 
-const generateCards = (question, i, rotate, invisible) =>
+const generateCards = (question, i, rotate, invisible, image) =>
 {
-	view.createContainer("_" + i, invisible);
+	view.createContainer("_" + i, invisible, image);
 	view.setQuestionName(question.text, i, rotate);
 	view.setButtons(question.answers, i);
 }

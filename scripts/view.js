@@ -19,7 +19,7 @@ const view = {
 	swipeDelay: 150,
 	endSetup: false,
 
-	createContainer: (i, invisible) => {
+	createContainer: (i, invisible, image) => {
 		let container =
 			`<div id="${i}" class="container">
 				<div class="questionName">
@@ -27,7 +27,7 @@ const view = {
 					<div class="circle"><div></div></div>
 					<div class="circle"><div></div></div>
 					<div class="circle"><div></div></div>
-					<img src="graphics/play-fill.svg" alt="My Happy SVG"/>
+					<img src="data:image/png;base64, ${image}" alt="My Happy SVG"/>
 					<h2></h2>
 				</div>
 				<div id="score">
@@ -37,6 +37,9 @@ const view = {
 			</div>`;
 
 		$(".parent").eq(1).prepend(container);
+		if (image === undefined) {
+			$(`#${i} img`).hide();
+		}
 
 		if (invisible) {
 			$(`#${i}`).css("visibility", "hidden");
@@ -205,7 +208,7 @@ const view = {
 	fitText: (name) => {
 		$(`.${name} h2`).each(function (i) {
 			let size;
-			let desiredHeight = 160;
+			let desiredHeight = 190;
 
 			while ($(this).prop("scrollHeight") > desiredHeight || $(this).prop('scrollWidth') > $(this).width()) {
 				size = parseInt($(this).css("font-size"), 10);
