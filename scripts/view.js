@@ -27,7 +27,7 @@ const view = {
 					<div class="circle"><div></div></div>
 					<div class="circle"><div></div></div>
 					<div class="circle"><div></div></div>
-					<img src="data:image/png;base64, ${image}" alt="My Happy SVG"/>
+					<img src="data:image/svg+xml;base64,${image}" alt="My Happy SVG"/>
 					<h2></h2>
 				</div>
 				<div id="score">
