@@ -17,7 +17,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: Fedra;
-	color: #5D6B7E;
+	color: #436980;
 }
 
 .parent {
@@ -107,7 +107,7 @@ body {
 }
 
 #scoreNum {
-	color: #F26671;
+	color: #e8d755;
 	position: absolute;
 	margin: 10px 10px 20px 30px;
 	font-size: 100px;
@@ -136,7 +136,6 @@ body {
 	width: 300px;
     font-size: 33px;
 	font-weight: normal;
-	color: #436980;
 	overflow: auto;
 }
 
