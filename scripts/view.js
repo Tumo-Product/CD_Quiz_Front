@@ -162,11 +162,11 @@ const view = {
 		$("#hollow").removeClass("widenHollow");
 		view.updateProgressBar(0, true);
 	},
-	setupEnd: (i) => {
+	setupEnd: (i, image) => {
 		if (!view.endSetup) {
 			$(`#_${i} .questionName`).hide();
 			$(`#_${i}`).addClass("endingScreen");
-			$(`#_${i}`).prepend(`<img src="graphics/play-fill.svg">`);
+			$(`#_${i}`).prepend(`<img id="outcome" src="data:image/svg+xml;base64,${image}">`);
 		}
 
 		view.endSetup = true;

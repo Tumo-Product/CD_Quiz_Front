@@ -4,6 +4,11 @@
 }
 
 @font-face{
+    font-family: FedraBold;
+    src: url('../fonts/FedraSansAltPro/FedraSansAltPro-Bold.otf');
+}
+
+@font-face{
     font-family: FedraBook;
     src: url('../fonts/FedraSansAltPro/FedraSansAltPro-Book.otf');
 }
@@ -109,8 +114,18 @@ body {
 #scoreNum {
 	color: #e8d755;
 	position: absolute;
-	margin: 10px 10px 20px 30px;
-	font-size: 100px;
+	left: 332px;
+	top: 66px;
+	font-family: FedraBold;
+	font-size: 72px;
+}
+
+#outcome {
+	position: absolute;
+	left: 35px;
+	top: 21px;
+	height: 357px;
+  	width: 279px;
 }
 
 .questionName {
@@ -230,16 +245,21 @@ body {
 	width: 560px;
 }
 
+#score {
+	position: absolute;
+	left: 332px;
+	bottom: 73px;
+	height: 170px;
+  	width: 294px;
+	pointer-events: none;
+}
+
 #score h2 {
 	color: #5D6B7E !important;
 	font-family: FedraBook;
-    font-size: 11px;
+    font-size: 12px;
 	font-weight: normal;
-    text-align: center;
 	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
 
 .images {

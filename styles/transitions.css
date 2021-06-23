@@ -60,15 +60,6 @@
 	padding: 20px !important;
 }
 
-.endingScreen img {
-	border-radius: 19px;
-	background-color: white;
-}
-
-.endingScreen #score {
-	padding: 20px;
-}
-
 .endTransition, .endTransition div {
 	transition: 0.4s !important;
 }

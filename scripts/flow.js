@@ -2,6 +2,7 @@ const flow_data = {
 	set_data: {},
 	index: 0,
 	score: 0,
+	answer_image: ""
 }
 
 let oldScore = -1;
@@ -25,6 +26,7 @@ const onPageLoad = async () =>
 		_uid = _uid.substr(1, _uid.length - 2);
 		let data = await parser.dataFetch(_uid);
 		flow_data.set_data = data.data.data;
+		flow_data.answer_image = flow_data.set_data.answer_image;
 
 		view.drawStartingScreen(flow_data.set_data.description);
 
@@ -59,7 +61,7 @@ const nextQuestion = async () =>
 		if (i != l) changeCard(i);
 		updateProgress(false);
 		
-		if (i == l - 2) view.setupEnd(l);
+		if (i == l - 2) view.setupEnd(l, flow_data.answer_image);
 		if (i == l) {
 			view.updateScore(flow_data.set_data.answer, flow_data.score, flow_data.set_data.questions.length);
 			await timeout(600);
