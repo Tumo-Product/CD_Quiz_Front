@@ -37,8 +37,8 @@ const onPageLoad = async () =>
 
 		view.drawEndingScreen(flow_data.set_data.questions.length);
 
-		await timeout(1000);
-		view.fitText("questionName");
+		await timeout(1500);
+		view.fitText(".questionName h2", 190);
 		
 		view.toggleLoadingScreen();
 	}
@@ -63,7 +63,7 @@ const nextQuestion = async () =>
 		
 		if (i == l - 2) view.setupEnd(l, flow_data.answer_image);
 		if (i == l) {
-			view.updateScore(flow_data.set_data.answer, flow_data.score, flow_data.set_data.questions.length);
+			view.updateScore(flow_data.set_data.answer, Number(flow_data.score.toFixed(6)), flow_data.set_data.questions.length);
 			await timeout(600);
 			changeCard(i);
 			view.collectCards(flow_data.set_data.questions.length);
@@ -86,7 +86,7 @@ const changeCard = (i) =>
 const onButtonClick = (id) =>
 {
 	oldScore = flow_data.score;
-	flow_data.score += flow_data.set_data.questions[flow_data.index].answers[id].points;
+	flow_data.score += parseFloat(flow_data.set_data.questions[flow_data.index].answers[id].points);
 	nextQuestion();
 }
 

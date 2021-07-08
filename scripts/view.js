@@ -27,7 +27,7 @@ const view = {
 					<div class="circle"><div></div></div>
 					<div class="circle"><div></div></div>
 					<div class="circle"><div></div></div>
-					<img src="data:image/svg+xml;base64,${image}" alt="My Happy SVG"/>
+					<img src="${image}" alt="My Happy SVG"/>
 					<h2></h2>
 				</div>
 				<div id="score">
@@ -101,14 +101,14 @@ const view = {
 		$("#play").attr("onclick", "").unbind("click");
 		$("#play").attr("style", "cursor: initial !important");
 
-		$(".item").mousedown(function () {
+		$("button").mousedown(function () {
 			$(this).append(`<div class="click"></div>`);
 		});
-		$(".item").mouseup(async function () {
+		$("button").mouseup(async function () {
 			await timeout(view.swipeDelay);
 			$(this).find(".click").remove();
 		});
-		$(".item").mouseleave(function () {
+		$("button").mouseleave(function () {
 			$(this).find(".click").remove();
 		});
 
@@ -166,7 +166,7 @@ const view = {
 		if (!view.endSetup) {
 			$(`#_${i} .questionName`).hide();
 			$(`#_${i}`).addClass("endingScreen");
-			$(`#_${i}`).prepend(`<img id="outcome" src="data:image/svg+xml;base64,${image}">`);
+			$(`#_${i}`).prepend(`<img id="outcome" src="${image}">`);
 		}
 
 		view.endSetup = true;
@@ -205,10 +205,15 @@ const view = {
 			$("#play").addClass("end");
 		}
 	},
-	fitText: (name) => {
-		$(`.${name} h2`).each(function (i) {
+	fitText: (name, height) => {
+		let desiredHeight = height;
+
+		$(name).each(function (i) {
 			let size;
-			let desiredHeight = 190;
+
+			if ($(this).prop("scrollHeight") <= desiredHeight && $(this).prop('scrollWidth') <= $(this).width()) {
+				return true;
+			}
 
 			while ($(this).prop("scrollHeight") > desiredHeight || $(this).prop('scrollWidth') > $(this).width()) {
 				size = parseInt($(this).css("font-size"), 10);

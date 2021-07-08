@@ -25,6 +25,10 @@ body {
 	color: #436980;
 }
 
+p, h2 {
+	white-space: pre-line;
+}
+
 .parent {
     margin: 0;
     height: 100vh;
@@ -205,10 +209,8 @@ body {
 }
 
 .item {
+	position: relative;
 	margin-bottom: 26px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
 
 #questions div {
@@ -274,13 +276,16 @@ body {
 }
 
 button {
-	padding: 14px 10px 10px 21px;
-	
 	font-family: FedraBook;
 	font-size: 13px;
 	font-weight: lighter;
+
+	overflow: hidden;
+	padding: 14px 10px 10px 21px;
+	
 	width: 270px;
-	height: 53px;
+	height: auto;
+	min-height: 53px;
     cursor: pointer;
 	border: none;
 	border-radius: 10px;
@@ -296,11 +301,10 @@ button:hover {
 .click {
 	border-radius: 10px;
 	position: absolute;
-	margin-top: 2px;
-	margin-left: 2px;
+	top: 2px;
+	left: 5px;
 	width: 266px !important;
-	height: 49px;
-	margin: 0 !important;
+	height: 93%;
 	box-shadow: inset 1px 2px 2px 1px #DEDEE680, inset -1px -1px 5px #ffffff;
 	pointer-events: none;
 }
