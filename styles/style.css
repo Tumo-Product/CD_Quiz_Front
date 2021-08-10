@@ -254,8 +254,8 @@ p, h2 {
 #score {
 	position: absolute;
 	left: 332px;
-	bottom: 73px;
-	height: 170px;
+	top: 159px;
+	height: 219px;
   	width: 294px;
 	pointer-events: none;
 }

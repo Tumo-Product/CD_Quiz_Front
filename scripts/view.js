@@ -160,7 +160,7 @@ const view = {
 		
 		$(`#_${i}`).prepend(`<h1 id="scoreNum">${score}</h1>`)
 		$(`#_${i} #score h2`).html(parser.finalScoreString(text, score));
-		view.fitText("#score h2", 170, true);
+		view.fitText("#score h2", 219, true);
 
 		$("#play svg").remove();
 		$("#play").removeClass("widen");
