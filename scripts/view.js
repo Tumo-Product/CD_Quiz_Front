@@ -231,7 +231,6 @@ const view = {
 
 				if (changeLineHeight) {
 					lineHeight = parseFloat($(this).css("line-height"), 10);
-					console.log(lineHeight);
 					$(this).css("line-height", `${lineHeight - 0.5}px`);
 				}
 			}
