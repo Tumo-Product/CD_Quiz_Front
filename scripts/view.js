@@ -133,6 +133,11 @@ const view = {
 		document.getElementById(id).style.backgroundColor = color;
 	},
 	setQuestionName: (qname, i, rotate) => {
+		if (qname == "" || qname === undefined) {
+			$(`#_${i} .questionName img`).css("display", "flex");
+			$(`#_${i} .questionName`).css("justify-content", "center");
+		}
+		
 		$(`#_${i} .questionName h2`).html(qname);
 
 		if (rotate) {
