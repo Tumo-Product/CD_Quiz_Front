@@ -196,16 +196,20 @@ p, h2 {
     padding-right: 13px;
 	height: 376px;
 	width: 350px;
-	margin-left: 9px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	margin-left: 9px;
 	padding-left: 25px;
 }
 
+.item:first-child {
+	margin-top: 20px;
+}
+
 .item:last-child {
-	margin: 0;
+	margin-bottom: 20px;
 }
 
 .item {
@@ -259,9 +263,11 @@ p, h2 {
 #score h2 {
 	color: #5D6B7E !important;
 	font-family: FedraBook;
-    font-size: 12px;
 	font-weight: normal;
 	height: 100%;
+	overflow: auto;
+    line-height: 21px;
+    font-size: 15px;
 }
 
 .images {

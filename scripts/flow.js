@@ -16,7 +16,6 @@ const timeout = (ms) => {
 
 const onPageLoad = async () =>
 {
-	let def = "Id not found";
 	let get_url = document.location.href;
 	let url = new URL(get_url);
 	let _uid = url.searchParams.get("_uid");

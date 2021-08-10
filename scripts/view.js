@@ -59,6 +59,10 @@ const view = {
 			$(`#_${i}`).append(view.questions);
 
 			$(`#_${i} #questions`).append(html);
+
+			if ($(".item").length > 4) {
+				$(`#_${i} #questions`).css("justify-content", "flex-start");
+			}
 		})
 	},
 	toggleLoadingScreen: () => {
@@ -156,6 +160,7 @@ const view = {
 		
 		$(`#_${i}`).prepend(`<h1 id="scoreNum">${score}</h1>`)
 		$(`#_${i} #score h2`).html(parser.finalScoreString(text, score));
+		view.fitText("#score h2", 170, true);
 
 		$("#play svg").remove();
 		$("#play").removeClass("widen");
@@ -205,7 +210,7 @@ const view = {
 			$("#play").addClass("end");
 		}
 	},
-	fitText: (name, height) => {
+	fitText: (name, height, changeLineHeight) => {
 		let desiredHeight = height;
 
 		$(name).each(function (i) {
@@ -216,8 +221,15 @@ const view = {
 			}
 
 			while ($(this).prop("scrollHeight") > desiredHeight || $(this).prop('scrollWidth') > $(this).width()) {
-				size = parseInt($(this).css("font-size"), 10);
-				$(this).css("font-size", size - 3);
+				fontSize   = parseFloat($(this).css("font-size"));
+				// console.log("scrollHeight: " + $(this).prop("scrollHeight"), "scrollWidth: " + $(this).prop('scrollWidth'), "width: " + $(this).width());
+				$(this).css("font-size", fontSize - 0.5);
+
+				if (changeLineHeight) {
+					lineHeight = parseFloat($(this).css("line-height"), 10);
+					console.log(lineHeight);
+					$(this).css("line-height", `${lineHeight - 0.5}px`);
+				}
 			}
 		});
 	},
