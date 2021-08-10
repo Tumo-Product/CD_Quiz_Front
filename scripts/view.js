@@ -222,7 +222,6 @@ const view = {
 
 			while ($(this).prop("scrollHeight") > desiredHeight || $(this).prop('scrollWidth') > $(this).width()) {
 				fontSize   = parseFloat($(this).css("font-size"));
-				// console.log("scrollHeight: " + $(this).prop("scrollHeight"), "scrollWidth: " + $(this).prop('scrollWidth'), "width: " + $(this).width());
 				$(this).css("font-size", fontSize - 0.5);
 
 				if (changeLineHeight) {
