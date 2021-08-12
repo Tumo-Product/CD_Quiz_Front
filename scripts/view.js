@@ -60,7 +60,7 @@ const view = {
 
 			$(`#_${i} #questions`).append(html);
 
-			if ($(".item").length > 4) {
+			if ($(`#_${i} .item`).length > 4) {
 				$(`#_${i} #questions`).css("justify-content", "flex-start");
 			}
 		})
