@@ -13,6 +13,15 @@
     src: url('../fonts/FedraSansAltPro/FedraSansAltPro-Book.otf');
 }
 
+@font-face{
+    font-family: FedraDemi;
+    src: url('../fonts/FedraSansAltPro/FedraSansAltPro-Demi.otf');
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
 body {
 	background: #F3F3F3;
 }
@@ -305,6 +314,8 @@ button:hover {
 }
 
 .click {
+	opacity: 0;
+	transition: 0.2s;
 	border-radius: 10px;
 	position: absolute;
 	top: 2px;
@@ -315,30 +326,54 @@ button:hover {
 	pointer-events: none;
 }
 
-#undo {
+#undo, #continue {
 	display: none;
 	transition: 0.2s;
-	width: 30px !important;
-	height: 30px !important;
+	width: 50px !important;
+	height: 50px !important;
 	position: fixed;
 	bottom: 31px;
-	left: 22px;
 	cursor: pointer;
 }
 
-#undo div {
-	width: 26px !important;
-	height: 26px !important;
+#undo {
+	left: 22px;
 }
 
-#undo svg {
+#continue {
+	right: 22px;
+	transform: scaleX(-1) rotate(360deg);
+}
+
+#undo div, #continue div {
+	width: 45px !important;
+	height: 45px !important;
+}
+
+#undo svg, #continue svg {
 	fill: #e8d755;
+	width: 50%;
+	height: 50%;
 }
 
-#undo:hover svg{
+#undo:hover svg, #continue:hover svg{
 	fill: #E8D75579;
 }
 
-#undo:active svg {
+#undo:active svg, #continue:active svg {
 	fill: #E8D75553;
+}
+
+.statusBar {
+	position: absolute;
+	top: 20px;
+	display: flex;
+	font-family: FedraDemi;
+	font-size: 24px;
+	transition: 0.5s;
+	opacity: 0;
+}
+
+.statusBar span {
+	color: #EAAC7F;
 }

@@ -2,11 +2,11 @@ const flow_data = {
 	set_data: {},
 	index: 0,
 	score: 0,
-	answer_image: ""
+	answer_image: "",
 }
 
 let oldScore = -1;
-
+let selected = 0;
 let progWidth = 317-30;
 let step = 0;
 
@@ -25,6 +25,8 @@ const onPageLoad = async () =>
 		_uid = _uid.substr(1, _uid.length - 2);
 		let data = await parser.dataFetch(_uid);
 		flow_data.set_data = data.data.data;
+		// flow_data.set_data.multipleChoice = true; // test
+		// flow_data.set_data.maxAnswers = 5;
 		flow_data.answer_image = flow_data.set_data.answer_image;
 
 		view.drawStartingScreen(flow_data.set_data.description);
@@ -84,14 +86,23 @@ const changeCard = (i) =>
 
 const onButtonClick = (id) =>
 {
-	oldScore = flow_data.score;
-	flow_data.score += parseFloat(flow_data.set_data.questions[flow_data.index].answers[id].points);
-	nextQuestion();
+	if (flow_data.set_data.multipleChoice !== true) {
+		oldScore = flow_data.score;
+		flow_data.score += parseFloat(flow_data.set_data.questions[flow_data.index].answers[id].points);
+		nextQuestion();
+	}
 }
 
 const onPlay = () =>
 {
+	if (flow_data.set_data.maxAnswers !== undefined) {
+		$(".statusBar").css("opacity", 1);
+		$(".statusBar span").eq(2).text(flow_data.set_data.maxAnswers);
+	}
+
 	view.onPlay(flow_data.set_data.questions.length);
+	if (flow_data.set_data.multipleChoice === true)
+		view.showContinue();
 }
 
 const onUndo = () => {
@@ -103,6 +114,46 @@ const onUndo = () => {
 	}
 
 	updateProgress(true);
+}
+
+const toggleButton = (i) => {
+	let parent = $(`#_${flow_data.index}`);
+	let answer = flow_data.set_data.questions[flow_data.index].answers[i];
+	if (answer.selected === undefined) answer.selected = false;
+
+	if (selected + 1 > flow_data.set_data.maxAnswers && (answer.selected == false))
+		return;
+	
+	answer.selected = !answer.selected;
+
+	if (answer.selected === true) {
+		view.enableClick(parent, i);
+
+		
+		selected++;
+	}
+	else {
+		view.disableClick(parent, i);
+		selected--;
+	}
+
+	$(".statusBar span").eq(0).text(selected);
+}
+
+const onContinue = () => {
+	let answers = flow_data.set_data.questions[flow_data.index].answers;
+	let score = 0;
+	for (let i = 0; i < answers.length; i++) {
+		if (answers[i].selected === true) {
+			score += parseFloat(answers[i].points);
+		}
+	}
+
+	if (score == 0) return;
+
+	oldScore = flow_data.score;
+	flow_data.score += parseFloat(score);
+	nextQuestion();
 }
 
 const updateProgress = (undo) => {

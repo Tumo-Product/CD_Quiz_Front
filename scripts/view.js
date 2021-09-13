@@ -105,16 +105,18 @@ const view = {
 		$("#play").attr("onclick", "").unbind("click");
 		$("#play").attr("style", "cursor: initial !important");
 
-		$("button").mousedown(function () {
-			$(this).append(`<div class="click"></div>`);
-		});
-		$("button").mouseup(async function () {
-			await timeout(view.swipeDelay);
-			$(this).find(".click").remove();
-		});
-		$("button").mouseleave(function () {
-			$(this).find(".click").remove();
-		});
+		if (flow_data.set_data.multipleChoice !== true) {
+			$("button").mousedown(function () {
+				$(this).append(`<div class="click"></div>`);
+			});
+			$("button").mouseup(async function () {
+				await timeout(view.swipeDelay);
+				$(this).find(".click").remove();
+			});
+			$("button").mouseleave(function () {
+				$(this).find(".click").remove();
+			});
+		}
 
 		$("#undo").mousedown(function () {
 			$(this).find("div").hide();
@@ -127,7 +129,17 @@ const view = {
 		});
 	},
 	createButton: (val, id) => {
-		return `<div class="item"><button onclick="onButtonClick(${id})" id ="${id}">` + val + "</button></div>";
+		if (flow_data.set_data.multipleChoice !== true) {
+			return `<div class="item"><button onclick="onButtonClick(${id})" id="${id}">${val}</button></div>`;
+		} else {
+			return `<div class="item"><button onclick="toggleButton(${id})" id="${id}">${val}<div class="click"></div></button></div>`;
+		}
+	},
+	enableClick: (parent, i) => {
+		parent.find(`#${i} .click`).css("opacity", 1);
+	},
+	disableClick: (parent, i) => {
+		parent.find(`#${i} .click`).css("opacity", 0);
 	},
 	changeColor: (id, color) => {
 		document.getElementById(id).style.backgroundColor = color;
@@ -195,6 +207,7 @@ const view = {
 
 		$(`#_${i + 1}`).addClass("right");
 		$("#_" + i).addClass("center");
+		$(`#_${i} .click`).css("opacity", 0);
 		$("#_" + (i - 1)).addClass("left");
 	},
 	updateProgressBar: async (step, reset) => {
@@ -241,6 +254,12 @@ const view = {
 	},
 	hideUndo: () => {
 		$("#undo").hide();
+	},
+	showContinue: () => {
+		$("#continue").css("display", "flex");
+	},
+	hideContinue: () => {
+		$("#continue").hide();
 	},
 	collectCards: (lastIndex) => {
 		for (let i = 1; i < 3; i++) {
