@@ -63,3 +63,16 @@
 .endTransition, .endTransition div {
 	transition: 0.4s !important;
 }
+
+.disabledItem {
+	color: #d2d2d2 !important;
+	pointer-events: none;
+}
+
+.disabledBtn {
+	pointer-events: none!important;
+}
+
+.disabledBtn svg {
+	fill: #E8E8EC !important;
+}

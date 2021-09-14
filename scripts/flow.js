@@ -106,7 +106,10 @@ const onPlay = () =>
 }
 
 const onUndo = () => {
-	flow_data.score = oldScore;
+	if (flow_data.set_data.multipleChoice !== true) {
+		flow_data.score = oldScore;
+	}
+	
 	changeCard(--flow_data.index);
 
 	if (flow_data.index < 1) {
@@ -116,7 +119,7 @@ const onUndo = () => {
 	updateProgress(true);
 }
 
-const toggleButton = (i) => {
+const toggleButton = async (i) => {
 	let parent = $(`#_${flow_data.index}`);
 	let answer = flow_data.set_data.questions[flow_data.index].answers[i];
 	if (answer.selected === undefined) answer.selected = false;
@@ -129,31 +132,59 @@ const toggleButton = (i) => {
 	if (answer.selected === true) {
 		view.enableClick(parent, i);
 
-		
+		flow_data.score += parseFloat(answer.points);
 		selected++;
 	}
 	else {
 		view.disableClick(parent, i);
+
+		flow_data.score -= parseFloat(answer.points);
 		selected--;
 	}
 
+	if (flow_data.index == flow_data.set_data.questions.length - 1 && selected == 0) {
+		$("#continue").addClass("disabledBtn");
+	} else {
+		$("#continue").removeClass("disabledBtn");
+	}
+
 	$(".statusBar span").eq(0).text(selected);
+
+	let questions = flow_data.set_data.questions;
+	if (selected == flow_data.set_data.maxAnswers) {
+		for (let q = 0; q < questions.length; q++) {
+			for (let a = 0; a < questions[q].answers.length; a++)
+			{
+				if (questions[q].answers[a].selected !== true)
+					$(`#_${q} #${a}`).addClass("disabledItem");
+			}
+		}
+	} else {
+		$("button").removeClass("disabledItem");
+	}
 }
 
 const onContinue = () => {
 	let answers = flow_data.set_data.questions[flow_data.index].answers;
 	let score = 0;
+
 	for (let i = 0; i < answers.length; i++) {
 		if (answers[i].selected === true) {
 			score += parseFloat(answers[i].points);
 		}
 	}
 
-	if (score == 0) return;
+	// if (score == 0) return;
+	if (flow_data.set_data.multipleChoice !== true) {
+		oldScore = flow_data.score;
+		flow_data.score += parseFloat(score);
+	}
 
-	oldScore = flow_data.score;
-	flow_data.score += parseFloat(score);
 	nextQuestion();
+
+	if (flow_data.index == flow_data.set_data.questions.length - 2 && selected == 0) {
+		$("#continue").addClass("disabledBtn");
+	}
 }
 
 const updateProgress = (undo) => {

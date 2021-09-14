@@ -291,6 +291,7 @@ p, h2 {
 }
 
 button {
+	transition: 0.3s;
 	font-family: FedraBook;
 	font-size: 13px;
 	font-weight: lighter;
@@ -345,6 +346,10 @@ button:hover {
 	transform: scaleX(-1) rotate(360deg);
 }
 
+svg {
+	transition: 0.3s;
+}
+
 #undo div, #continue div {
 	width: 45px !important;
 	height: 45px !important;
@@ -375,5 +380,5 @@ button:hover {
 }
 
 .statusBar span {
-	color: #EAAC7F;
+	color: #eba4a4;
 }

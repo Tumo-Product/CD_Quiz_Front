@@ -108,6 +108,7 @@ const view = {
 		if (flow_data.set_data.multipleChoice !== true) {
 			$("button").mousedown(function () {
 				$(this).append(`<div class="click"></div>`);
+				$(this).find(".click").css("opacity", 1);
 			});
 			$("button").mouseup(async function () {
 				await timeout(view.swipeDelay);
@@ -207,7 +208,7 @@ const view = {
 
 		$(`#_${i + 1}`).addClass("right");
 		$("#_" + i).addClass("center");
-		$(`#_${i} .click`).css("opacity", 0);
+		// $(`#_${i} .click`).css("opacity", 0);
 		$("#_" + (i - 1)).addClass("left");
 	},
 	updateProgressBar: async (step, reset) => {
