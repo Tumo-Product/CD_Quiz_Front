@@ -268,5 +268,8 @@ const view = {
 			$(`#_${lastIndex - i}`).addClass("center");
 			$(`#_${lastIndex - i}`).css("transform", `rotate(${view.rotations[i - 1]}deg)`);
 		}
+
+		$(".statusBar").hide();
+		$("#continue").hide();
 	}
 }
