@@ -14,7 +14,7 @@ const view = {
 		</div>`
 	,
 	name: '<div id="name"><h1></h1></div>',
-	questions: `<div id="questions">`,
+	questions: `<div class="questionsOverlay"></div><div id="questions">`,
 	progress: 0,
 	swipeDelay: 150,
 	endSetup: false,
@@ -57,7 +57,6 @@ const view = {
 
 		$(function () {
 			$(`#_${i}`).append(view.questions);
-
 			$(`#_${i} #questions`).append(html);
 
 			if ($(`#_${i} .item`).length > 4) {
@@ -137,10 +136,10 @@ const view = {
 		}
 	},
 	enableClick: (parent, i) => {
-		parent.find(`#${i} .click`).css("opacity", 1);
+		parent.find(`#${i}`).addClass("btnClicked");
 	},
 	disableClick: (parent, i) => {
-		parent.find(`#${i} .click`).css("opacity", 0);
+		parent.find(`#${i}`).removeClass("btnClicked");
 	},
 	changeColor: (id, color) => {
 		document.getElementById(id).style.backgroundColor = color;

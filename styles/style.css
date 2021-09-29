@@ -199,10 +199,31 @@ p, h2 {
     right:0;
 }
 
+.questionsOverlay {
+	pointer-events: none;
+	z-index: 11;
+	position: absolute;
+	left: 340px;
+	overflow-y: auto;
+    overflow-x: hidden;
+    /* padding-right: 13px; */
+	height: 376px;
+	width: 315px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-left: 9px;
+	/* padding-left: 25px; */
+
+    box-shadow: inset -3px -3px 4px 0 #fefefe, inset 3px 3px 4px 0 rgb(222 222 230 / 50%);
+    border-radius: 10px;
+}
+
 #questions {
     overflow-y: auto;
     overflow-x: hidden;
-    padding-right: 13px;
+    /* padding-right: 13px; */
 	height: 376px;
 	width: 350px;
 	display: flex;
@@ -210,7 +231,10 @@ p, h2 {
 	align-items: center;
 	flex-direction: column;
 	margin-left: 9px;
-	padding-left: 25px;
+	/* padding-left: 25px; */
+
+    /* box-shadow: inset -3px -3px 4px 0 #fefefe, inset 3px 3px 4px 0 rgb(222 222 230 / 50%); */
+    border-radius: 10px;
 }
 
 .item:first-child {
@@ -320,7 +344,7 @@ button:hover {
 	border-radius: 10px;
 	position: absolute;
 	top: 2px;
-	left: 5px;
+	left: 24px;
 	width: 266px !important;
 	height: 93%;
 	box-shadow: inset 1px 2px 2px 1px #DEDEE680, inset -1px -1px 5px #ffffff;
@@ -381,4 +405,19 @@ svg {
 
 .statusBar span {
 	color: #eba4a4;
+}
+
+.btnClicked {
+	/* box-shadow: inset 3px 3px 5px 0 #9a820bbd, inset -3px -3px 5px #cebf4470;
+	background-color: #ecdd6094;
+	color: #5D6B7E !important; */
+
+	box-shadow: inset 3px 3px 5px 0 #728094, inset -3px -3px 5px #9dadc5;
+	/* box-shadow: inset -3px -3px 5px 0 #2c2c2c1f, inset 3px 3px 5px 0 #2c2c2c13 !important; */
+	color: #F3F3F3;
+	background-color: #7890b1a1;
+}
+
+.btnClicked:hover {
+	color: #f3f3f38f;
 }
