@@ -25,8 +25,6 @@ const onPageLoad = async () =>
 		_uid = _uid.substr(1, _uid.length - 2);
 		let data = await parser.dataFetch(_uid);
 		flow_data.set_data = data.data.data;
-		// flow_data.set_data.multipleChoice = true; // test
-		// flow_data.set_data.maxAnswers = 5;
 		flow_data.answer_image = flow_data.set_data.answer_image;
 
 		view.drawStartingScreen(flow_data.set_data.description);

@@ -32,6 +32,7 @@ body {
     box-sizing: border-box;
     font-family: Fedra;
 	color: #436980;
+	font-variant: lining-nums;
 }
 
 p, h2 {

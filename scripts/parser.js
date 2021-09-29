@@ -14,6 +14,7 @@ const parser = {
         
         finalString += splitText[splitText.length - 1];
 
+        finalString = finalString.replace("%{popImp}", score * 2100000);
         return finalString;
     }
 }
