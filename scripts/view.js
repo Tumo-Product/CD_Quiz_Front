@@ -181,8 +181,18 @@ const view = {
 		} else {
 			currScore = score;
 		}
-		$(`#_${i}`).prepend(`<h1 id="scoreNum">${currScore}</h1>`)
-		$(`#_${i} #score h2`).html(parser.finalScoreString(text, score));
+
+		$(`#_${i}`).prepend(`<h1 id="scoreNum"></h1>`)
+		text = parser.finalScoreString(text, score);
+		if (text.includes(" : ")) {
+			let header = text.split(" : ")[0];
+			text = text.substring(text.indexOf(" : ") + 3);
+			currScore = header;
+			$(`#_${i} #scoreNum`).css("font-size", "30px");
+		}
+
+		$(`#_${i} #scoreNum`).html(currScore);
+		$(`#_${i} #score h2`).html(text);
 		view.fitText("#score h2", 219, true);
 
 		$("#play svg").remove();

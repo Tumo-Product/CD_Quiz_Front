@@ -172,7 +172,6 @@ const onContinue = () => {
 		}
 	}
 
-	// if (score == 0) return;
 	if (flow_data.set_data.multipleChoice !== true) {
 		oldScore = flow_data.score;
 		flow_data.score += parseFloat(score);
