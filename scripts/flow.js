@@ -9,6 +9,7 @@ let oldScore = -1;
 let selected = 0;
 let progWidth = 317-30;
 let step = 0;
+let scoreMultiplier;
 
 const timeout = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -26,6 +27,7 @@ const onPageLoad = async () =>
 		let data = await parser.dataFetch(_uid);
 		flow_data.set_data = data.data.data;
 		flow_data.answer_image = flow_data.set_data.answer_image;
+		scoreMultiplier = flow_data.set_data.scoreMultiplier;
 
 		view.drawStartingScreen(flow_data.set_data.description);
 

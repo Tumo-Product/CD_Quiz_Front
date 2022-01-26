@@ -180,6 +180,7 @@ const view = {
 			currScore = score * 2100000;
 		} else {
 			currScore = score;
+			if (scoreMultiplier !== undefined) currScore *= scoreMultiplier;
 		}
 
 		$(`#_${i}`).prepend(`<h1 id="scoreNum"></h1>`)

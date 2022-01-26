@@ -14,14 +14,34 @@ const parser = {
             let max     = (questionLength * 3) - questionLength;
             let value   = score - questionLength;
             let index   = Math.round((value * 2) / max);
-
-            console.log(impact);
-            console.log(max, value, index);
             finalString = impact[index];
         }
 
-        finalString = finalString.replace("%{scr}", score);
-        finalString = finalString.replace("%{popImp}", score * 2100000);
+        if (finalString.includes("%{scr}") || finalString.includes("%{popImp}")) {
+            finalString = finalString.replace("%{scr}", score);
+            finalString = finalString.replace("%{popImp}", score * 2100000);
+            return finalString;
+        }
+
+        let operations = [];
+        let strings = finalString.match(/\{.+?\}/g).map(function(str) {
+            let slicedString = str.slice(1, -1)
+            operations.push(slicedString);
+            return str;
+        });
+        
+
+        let values = [];
+        for (let i = 0; i < operations.length; i++) {
+            const runExpression = new Function("score", "return " + operations[i]);
+            let oldScore = score;
+            score = runExpression(score);
+            values.push(score.toFixed(3));
+            score = oldScore;
+
+            finalString = finalString.replace(strings[i], values[i]);
+        }
+        
         return finalString;
     }
 }
