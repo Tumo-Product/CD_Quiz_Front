@@ -181,6 +181,7 @@ const view = {
 		} else {
 			currScore = score;
 			if (scoreMultiplier !== undefined) currScore *= scoreMultiplier;
+			currScore.toFixed(2);
 		}
 
 		$(`#_${i}`).prepend(`<h1 id="scoreNum"></h1>`)

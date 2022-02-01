@@ -23,25 +23,26 @@ const parser = {
             return finalString;
         }
 
-        let operations = [];
-        let strings = finalString.match(/\{.+?\}/g).map(function(str) {
-            let slicedString = str.slice(1, -1)
-            operations.push(slicedString);
-            return str;
-        });
-        
+        let matches = finalString.match(/\{.+?\}/g);
+        if (matches !== null) {
+            let operations = [];
+            let strings = matches.map(function(str) {
+                let slicedString = str.slice(1, -1)
+                operations.push(slicedString);
+                return str;
+            });
 
-        let values = [];
-        for (let i = 0; i < operations.length; i++) {
-            const runExpression = new Function("score", "return " + operations[i]);
-            let oldScore = score;
-            score = runExpression(score);
-            values.push(score.toFixed(3));
-            score = oldScore;
+            let values = [];
+            for (let i = 0; i < operations.length; i++) {
+                const runExpression = new Function("score", "return " + operations[i]);
+                let oldScore = score;
+                score = runExpression(score);
+                values.push(score.toFixed(3));
+                score = oldScore;
 
-            finalString = finalString.replace(strings[i], values[i]);
+                finalString = finalString.replace(strings[i], values[i]);
+            }
         }
-        
         return finalString;
     }
 }
