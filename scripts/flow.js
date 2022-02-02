@@ -10,6 +10,7 @@ let selected = 0;
 let progWidth = 317-30;
 let step = 0;
 let scoreMultiplier;
+let rating = -1;
 
 const timeout = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));

@@ -181,11 +181,16 @@ const view = {
 		} else {
 			currScore = score;
 			if (scoreMultiplier !== undefined) currScore *= scoreMultiplier;
-			currScore.toFixed(2);
+			currScore = currScore.toFixed(2);
 		}
 
 		$(`#_${i}`).prepend(`<h1 id="scoreNum"></h1>`)
 		text = parser.finalScoreString(text, score);
+		if (rating != -1 && flow_data.set_data.answer_image.includes("${div}")) {
+			let outcomes = flow_data.set_data.answer_image.split("${div}");
+			$("#outcome").attr('src', outcomes[rating]);
+		}
+		
 		if (text.includes(" : ")) {
 			let header = text.split(" : ")[0];
 			text = text.substring(text.indexOf(" : ") + 3);

@@ -15,6 +15,7 @@ const parser = {
             let value   = score - questionLength;
             let index   = Math.round((value * 2) / max);
             finalString = impact[index];
+            rating = index;
         }
 
         if (finalString.includes("%{scr}") || finalString.includes("%{popImp}")) {
